@@ -2,35 +2,25 @@
 
 This repo will show you one of the ways to run an Althea node on Akash Network.
 
+---
+
 ## Deploy
 
-Go to https://console.akash.network/
+- Go to https://console.akash.network
+- Connect your wallet (You will need some AKT tokens to deploy)
+- On the left side bar click on Deployments and then click on the Deploy button.
+- Click on "Build your Template" and then on the YAML tab.
+- Delete everything in this page and copy/paste the deploy.yaml file that you can find in this repo. (You may edit the resources as you like, ex: CPUs, RAM and Storage)
+- Click on the "Create Deployment" button and accept the transaction with your wallet.
+- After the transaction is successful, you will see a list of Akash providers who can host your deployment or node.
+- Select the one that you like the most and confirm the transaction with your wallet.
+- Once your transaction goes through, you will see the events screen and how your deployment is being deployed.
+- After a short time, your Ubuntu instance will now be running on Akash Network.
+- To log in via ssh, you will need to find your provider's IP and the 22 port that they provided for you.
+- This can be done by going to https://dnschecker.org/ and entering your providers url.
+- You can find the 22 port provided for you in the leases tab in Akash Console. 
 
-Connect your wallet (You will need some AKT tokens to deploy)
-
-On the left side bar click on Deployments and then click on the Deploy button.
-
-Click on "Build your Template" and then on the YAML tab.
-
-Delete everything in this page and copy/paste the deploy.yaml file that you can find in this repo. (You may edit the resources as you like, ex: CPUs, RAM and Storage)
-
-Click on the "Create Deployment" button and accept the transaction with your wallet.
-
-After the transaction is successful, you will see a list of Akash providers who can host your deployment or node. 
-
-Select the one that you like the most and confirm the transaction with your wallet.
-
-Once your transaction goes through, you will see the events screen and how your deployment is being deployed. 
-
-After a short time, your Ubuntu instance will now be running on Akash Network.
-
-To log in via ssh, you will need to find your provider's IP and the 22 port that they provided for you.  
-
-This can be done by going to https://dnschecker.org/ and entering your providers url. 
-
-You can find the 22 port provided for you in the leases tab in Akash Console. 
-
-## Configuring your node
+## Configuring your deployment (Ubuntu instance)
 
 Once you have SSH'd into your Ubuntu instance, you will need to configure your node.
 
@@ -47,16 +37,18 @@ su -c "echo 'fs.file-max = 65536' >> /etc/sysctl.conf"
 sysctl -p
 ```
 
-- Install latest GO version (You can find the latest version at https://golang.org/dl) For this we will use Go version 1.22.6
+## Install latest GO version 
 
--- Download and extract
+ You can find the latest version at https://golang.org/dl. For this we will use Go version 1.22.6
+
+- Download and extract
 
 ``` 
 wget -c https://golang.org/dl/go1.22.6.linux-amd64.tar.gz
 tar xvf go1.22.6.linux-amd64.tar.gz -C /usr/local
 ```
 
--- Update environment variables to include Go
+- Update environment variables to include Go
 
 ```
 cat >> ~/.profile << 'EOF'
@@ -69,13 +61,13 @@ EOF
 source ~/.profile 
 ```
 
--- Verify that Go was installed correctly:
+- Verify that Go was installed correctly:
 
 ```
 go version
 ```
 
-- Clone and install Althea
+## Clone and install Althea
 
   At the moment of writing, the latest binary is v1.4.0. Check for latest binary in https://github.com/althea-net/althea-chain
 
@@ -169,7 +161,7 @@ curl -s localhost:26657/status  | jq .result.sync_info.catching_up
 curl -s localhost:26657/status | jq .result.sync_info.latest_block_height
 ```
 
-- Extras
+## Extras
 
 -- If you prefer, you can create a service to start your node, instead of having a tmux session ongoing.
 
