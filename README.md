@@ -24,7 +24,11 @@ Once your transaction goes through, you will see the events screen and how your 
 
 After a short time, your Ubuntu instance will now be running on Akash Network.
 
-To log in via ssh, you will need to find your provider's IP and the 22 port that they provided for you.  This can be done by going to https://dnschecker.org/ and entering your providers url. You can find the 22 port provided for you in the leases tab. 
+To log in via ssh, you will need to find your provider's IP and the 22 port that they provided for you.  
+
+This can be done by going to https://dnschecker.org/ and entering your providers url. 
+
+You can find the 22 port provided for you in the leases tab in Akash Console. 
 
 ## Configuring your node
 
@@ -118,9 +122,23 @@ sed -i -e "s|^persistent_peers *=.*|persistent_peers = \"$peers\"|" .althea/conf
 
 - Get a snapshot
 
-  To catch up with Althea chain as quickly as possible, we will use a snapshot. In this case we will use a snappshot by Polkachu (a well known Cosmos validator), but you can find other snapshots and use whichever you want.
+  To catch up with Althea chain as quickly as possible, we will use a snapshot. In this case we will use a snapshot by Polkachu (a well known Cosmos validator), but you can find other snapshots and use whichever you want.
 
-  
+```
+wget -O althea_1630613.tar.lz4 https://snapshots.polkachu.com/snapshots/althea/althea_1630613.tar.lz4 --inet4-only  
+```
+
+  Extract the snapshot into your .althea directory
+
+```
+lz4 -c -d althea_1630613.tar.lz4  | tar -x -C $HOME/.althea
+```
+
+  Remove downloaded snapshot to free up some space. (Make sure to change the file to the actual snapshot that you downloaded)
+
+```
+rm -v althea_1630613.tar.lz4
+```
 
 - Create tmux session
 
@@ -134,3 +152,25 @@ tmux new -t althea
 althea start
 ```
 
+  After seeing that blocks are being produced and that your node is catching up, exit your tmux session with ctrl + b and then d
+
+- Check your node status
+
+```
+curl -s localhost:26657/status  | jq .result.sync_info.catching_up  
+```
+
+  true = catching up
+  false = caught up
+
+- Check latest block
+
+```
+curl -s localhost:26657/status | jq .result.sync_info.latest_block_height
+```
+
+- Extras
+
+-- If you prefer, you can create a service to start your node, instead of having a tmux session ongoing.
+
+-- This process will work for other Cosmos SDK based blockchains. You will only need to change the cloned respository, seeds, persistent peers, genesis file and snapshot.
