@@ -16,7 +16,7 @@ services:
         service ssh start;
         echo ==== ssh user:"root" === ;
         echo === ssh pass:"$SSH_PASS" === ;
-        apt-get install nano unzip build-essential curl wget jq git tmux -y ;
+        apt-get install nano unzip build-essential curl wget jq git tmux lz4 -y ;
         sleep infinity'
     
     expose:
