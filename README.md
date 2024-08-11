@@ -1,6 +1,6 @@
 # althea-on-akash
 
-This repo will show you one of the ways to run an Althea node on Akash Network.
+This repo will show you one of the ways to run an Althea L1 node (https://www.althea.net/) on Akash Network (https://akash.network/).
 
 ---
 
