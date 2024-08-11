@@ -17,8 +17,8 @@ This repo will show you one of the ways to run an Althea L1 node (https://www.al
 - Once your transaction goes through, you will see the events screen and how your deployment is being deployed.
 - After a short time, your Ubuntu instance will now be running on Akash Network.
 - To log in via ssh, you will need to find your provider's IP and the 22 port that they provided for you.
-- This can be done by going to https://dnschecker.org/ and entering your providers url.
-- You can find the 22 port provided for you in the leases tab in Akash Console. 
+- You can find your Akash provider's IP, by going to https://dnschecker.org/ and entering your provider's url.
+- You can find the 22 port provided for you in the leases tab in Akash Console, in your recently created deployment section. 
 
 ## Configuring your deployment (Ubuntu instance)
 
