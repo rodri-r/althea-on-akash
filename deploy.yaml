@@ -1,0 +1,57 @@
+---
+version: "2.0"
+
+services:
+  app:
+    image: ubuntu:latest     
+    env:
+          - "SSH_PASS=CHOOSE_ANY_PASSWORD"
+    command:
+      - "bash"
+      - "-c"
+    args:
+      - 'apt-get update ; apt-get upgrade -y ; apt install -y ssh;
+        echo "PermitRootLogin yes" >> /etc/ssh/sshd_config ;
+        (echo $SSH_PASS; echo $SSH_PASS) | passwd root ; 
+        service ssh start;
+        echo ==== ssh user:"root" === ;
+        echo === ssh pass:"$SSH_PASS" === ;
+        apt-get install nano unzip build-essential curl wget jq git tmux -y ;
+        sleep infinity'
+    
+    expose:
+      - port: 26657
+        as: 80
+        to:
+          - global: true
+      - port: 22
+        as: 22
+        to:
+          - global: true
+      - port: 26656
+        as: 26656
+        to:
+          - global: true     
+profiles:
+  compute:
+    app:
+      resources:
+        cpu:
+          units: 5
+        memory:
+          size: 10Gi
+        storage:
+          size: 200Gi
+          
+  placement:
+    akash: 
+      attributes:            
+      pricing:
+        app:
+          denom: uakt
+          amount: 10000
+deployment:
+  app:
+    akash:
+      profile: app
+      count: 1
