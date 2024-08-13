@@ -95,7 +95,7 @@ althea init YOUR_MONIKER --chain-id althea_258432-1
 - Download Genesis
 
 ```
-wget -O genesis.json https://raw.githubusercontent.com/AltheaFoundation/althea-L1/main/genesis/althea-launch-genesis.json
+wget -O genesis.json https://snapshots.polkachu.com/genesis/althea/genesis.json --inet4-only
 mv genesis.json ~/.althea/config
 ```
 
