@@ -117,19 +117,19 @@ sed -i -e "s|^persistent_peers *=.*|persistent_peers = \"$peers\"|" .althea/conf
   To catch up with Althea chain as quickly as possible, we will use a snapshot. In this case we will use a snapshot by Polkachu (a well known Cosmos validator), but you can find other snapshots and use whichever you want.
 
 ```
-wget -O althea_1630613.tar.lz4 https://snapshots.polkachu.com/snapshots/althea/althea_1630613.tar.lz4 --inet4-only  
+wget -O althea_1660923.tar.lz4 https://snapshots.polkachu.com/snapshots/althea/althea_1660923.tar.lz4 --inet4-only
 ```
 
   Extract the snapshot into your .althea directory
 
 ```
-lz4 -c -d althea_1630613.tar.lz4  | tar -x -C $HOME/.althea
+lz4 -c -d althea_1660923.tar.lz4  | tar -x -C $HOME/.althea
 ```
 
   Remove downloaded snapshot to free up some space. (Make sure to change the file to the actual snapshot that you downloaded)
 
 ```
-rm -v althea_1630613.tar.lz4
+rm -v althea_1660923.tar.lz4
 ```
 
 - Create tmux session
